@@ -1,7 +1,5 @@
 package com.demoqa;
 
-import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selectors.byText;
@@ -9,19 +7,16 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 
 
-public class TestPracticeForm {
-
-    @BeforeAll
-    static void beforeAll() {
-        Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browserSize = "1920x1080";
-    }
+public class TestPracticeForm extends TestBase {
 
     @Test
     void shouldHaveFilledFieldsInModalBody() {
         open("/automation-practice-form");
+        $("[class='practice-form-wrapper']").should(text("Student Registration Form"));
+//        $("practice-form-wrapper").shouldHave(text("Student Registration Form")); не сработал у меня.. почему?
         executeJavaScript("$('footer').remove()");
         executeJavaScript("$('#fixedban').remove()");
+
 
         String firstName = "Ivan";
         String lastName = "Petrov";
@@ -35,35 +30,29 @@ public class TestPracticeForm {
         String reading = "Reading";
         String avatarPicture = "avatar.jpg";
 
-        $("input[id='firstName']").setValue(firstName);
-        $("input[id='lastName']").setValue(lastName);
-
-        $(byText("Male")).click();
-
-        $("input[id='userEmail']").setValue(userEmail);
-        $("input[id='userNumber']").setValue(userNumber);
+        $("#firstName").setValue(firstName);
+        $("#lastName").setValue(lastName);
+        $("#genterWrapper").$(byText("Male")).click();
+        $("#userEmail").setValue(userEmail);
+        $("#userNumber").setValue(userNumber);
 
         $("#dateOfBirthInput").click();
-
         $(".react-datepicker__month-select").selectOption("June");
         $(".react-datepicker__year-select").selectOption("1990");
-        $(".react-datepicker__day--022").click();
+        $(".react-datepicker__day--022:not(react-datepicker__day--outside-month)").click();
 
-        $("#subjectsInput").sendKeys("S");
-        $(byText("Social Studies")).click();
+        $("#subjectsInput").sendKeys("Social");
+        $("#subjectsInput").pressEnter();
 
-        $(byText(reading)).click();
+        $("#hobbiesWrapper").$(byText("Reading")).click();
+        $("#uploadPicture").uploadFromClasspath("picture/avatar.jpg");
+        $("#currentAddress").setValue(currentAddress);
 
-        $("#uploadPicture").uploadFromClasspath("picture/" + avatarPicture);
-
-        $("textarea[id='currentAddress']").setValue(currentAddress);
-
-        $("#react-select-3-input").setValue(state).pressEnter();
-        $("#react-select-4-input").setValue(city).pressEnter();
-
-
-        $("[id=submit]").click();
-
+        $("#state").click();
+        $("#stateCity-wrapper").$(byText("NCR")).click();
+        $("#city").click();
+        $("#stateCity-wrapper").$(byText("Gurgaon")).click();
+        $("#submit").click();
 
         $("[class=modal-body]")
                 .shouldHave(
@@ -72,5 +61,6 @@ public class TestPracticeForm {
                         text(state), text(city)
                 );
     }
+
 
 }
