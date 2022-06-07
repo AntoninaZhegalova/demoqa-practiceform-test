@@ -12,10 +12,9 @@ public class TestPracticeForm extends TestBase {
     @Test
     void shouldHaveFilledFieldsInModalBody() {
         open("/automation-practice-form");
-        $("[class='practice-form-wrapper']").should(text("Student Registration Form"));
-//        $("practice-form-wrapper").shouldHave(text("Student Registration Form")); не сработал у меня.. почему?
-        executeJavaScript("$('footer').remove()");
+        $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
         executeJavaScript("$('#fixedban').remove()");
+        executeJavaScript("$('footer').remove()");
 
 
         String firstName = "Ivan";
@@ -54,13 +53,22 @@ public class TestPracticeForm extends TestBase {
         $("#stateCity-wrapper").$(byText("Gurgaon")).click();
         $("#submit").click();
 
-        $("[class=modal-body]")
-                .shouldHave(
-                        text(firstName), text(lastName), text(userEmail), text(userNumber), text(dateOfBirthInput),
-                        text(subjectsContainer), text(reading), text(avatarPicture), text(currentAddress),
-                        text(state), text(city)
-                );
+        $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
+
+//        $(".table-responsive").shouldHave(text(firstName), text(lastName), text(userEmail),
+//                text(userNumber), text(dateOfBirthInput), text(subjectsContainer), text(reading),
+//                text(avatarPicture), text(currentAddress), text(state), text(city));
+
+//        $(".table-responsive").$(byText("Date of Birth")).parent()
+//                .shouldHave(text(dateOfBirthInput));
+
+        checkTable("Date of Birth", dateOfBirthInput);
+
     }
 
+    void checkTable(String key, String value) {
+        $(".table-responsive").$(byText(key))
+                .parent().shouldHave(text(value));
+    }
 
 }
