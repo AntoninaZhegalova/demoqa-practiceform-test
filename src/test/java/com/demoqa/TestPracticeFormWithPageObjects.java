@@ -3,9 +3,6 @@ package com.demoqa;
 import org.junit.jupiter.api.Test;
 import pages.PagePracticeForm;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
 import static com.demoqa.TestData.*;
 
 
@@ -14,7 +11,7 @@ public class TestPracticeFormWithPageObjects extends TestBase {
     @Test
     void shouldHaveFilledFieldsInModalBody() {
 
-        this.pagePracticeForm.openPage()
+        PagePracticeForm pagePracticeForm = this.pagePracticeForm.openPage()
                 .setFirstName(FIRST_NAME)
                 .setLastName(LAST_NAME)
                 .setGender(GENDER)
@@ -26,25 +23,26 @@ public class TestPracticeFormWithPageObjects extends TestBase {
                 .setUploadPicture(AVATAR_PICTURE)
                 .setCurrentAddress(CURRENT_ADDRESS)
                 .setState(STATE)
-                .setCity(CITY)
-                .pressSubmitButton()
-                .checkFormOpened(CHECK_FORM_TEXT);
-//                .checkResult();
+                .setCity(CITY);
 
-//        $(".table-responsive").shouldHave(text(firstName), text(lastName), text(userEmail),
-//                text(userNumber), text(dateOfBirthInput), text(subjectsContainer), text(reading),
-//                text(avatarPicture), text(currentAddress), text(state), text(city));
+        pagePracticeForm
+                .pressSubmitButton();
 
-//        $(".table-responsive").$(byText("Date of Birth")).parent()
-//                .shouldHave(text(dateOfBirthInput));
-
-//        checkTable("Date of Birth", dateOfBirthInput);
+        pagePracticeForm
+                .checkFormOpened(CHECK_FORM_TEXT)
+                .checkTable("Student Name", FIRST_NAME)
+                .checkTable("Student Name", LAST_NAME)
+                .checkTable("Student Email", USER_MAIL)
+                .checkTable("Gender", GENDER)
+                .checkTable("Mobile", USER_NUMBER)
+                .checkTable("Date of Birth", DAY)
+                .checkTable("Date of Birth", MONTH)
+                .checkTable("Date of Birth", YEAR)
+                .checkTable("Subjects", SUBJECTS_INPUT)
+                .checkTable("Hobbies", HOBBIES)
+                .checkTable("Picture", AVATAR_PICTURE)
+                .checkTable("Address", CURRENT_ADDRESS)
+                .checkTable("State and City", STATE + " " + CITY);
 
     }
-
-//    void checkTable(String key, String value) {
-//        $(".table-responsive").$(byText(key))
-//                .parent().shouldHave(text(value));
-//    }
-
 }

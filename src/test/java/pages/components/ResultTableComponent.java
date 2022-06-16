@@ -4,9 +4,12 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 
+
 public class ResultTableComponent {
-    public void chekTable(String key, String value){
+
+    public void chekResults(String key, String value) {
         $(".table-responsive").$(byText(key))
                 .parent().shouldHave(text(value));
     }
+
 }

@@ -1,6 +1,5 @@
 package pages;
 
-import com.beust.jcommander.IValueValidator;
 import pages.components.CalendarComponent;
 import pages.components.ResultTableComponent;
 
@@ -33,7 +32,7 @@ public class PagePracticeForm {
     }
 
     public PagePracticeForm setGender(String value) {
-        $("#genterWrapper").$(byText("Male")).click();
+        $("#genterWrapper").$(byText(value)).click();
         return this;
     }
 
@@ -52,44 +51,52 @@ public class PagePracticeForm {
         calendarComponent.setDate(day, month, year);
         return this;
     }
+
     public PagePracticeForm setSubjectsInput(String value) {
-        $("#subjectsInput").sendKeys("Social");
+        $("#subjectsInput").sendKeys(value);
         $("#subjectsInput").pressEnter();
         return this;
     }
+
     public PagePracticeForm setHobbiesWrapper(String value) {
-        $("#hobbiesWrapper").$(byText("Reading")).click();
+        $("#hobbiesWrapper").$(byText(value)).click();
         return this;
     }
+
     public PagePracticeForm setUploadPicture(String value) {
         $("#uploadPicture").uploadFromClasspath("picture/avatar.jpg");
         return this;
     }
+
     public PagePracticeForm setCurrentAddress(String value) {
         $("#currentAddress").setValue(value);
         return this;
     }
+
     public PagePracticeForm setState(String value) {
         $("#state").click();
-        $("#stateCity-wrapper").$(byText("NCR")).click();
+        $("#stateCity-wrapper").$(byText(value)).click();
         return this;
     }
+
     public PagePracticeForm setCity(String value) {
         $("#city").click();
-        $("#stateCity-wrapper").$(byText("Gurgaon")).click();
+        $("#stateCity-wrapper").$(byText(value)).click();
         return this;
     }
+
     public PagePracticeForm pressSubmitButton() {
         $("#submit").click();
         return this;
     }
-    public PagePracticeForm checkFormOpened(String value){
-        $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
+
+    public PagePracticeForm checkFormOpened(String value) {
+        $("#example-modal-sizes-title-lg").shouldHave(text(value));
         return this;
     }
 
-//    public PagePracticeForm checkResult(String key, String value) {
-//        resultTableComponent.chekTable(key, value);
-//        return this;
-//    }
+    public PagePracticeForm checkTable(String key, String value) {
+        resultTableComponent.chekResults(key, value);
+        return this;
+    }
 }
