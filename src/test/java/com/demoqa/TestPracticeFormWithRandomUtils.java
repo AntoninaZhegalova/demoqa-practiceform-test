@@ -6,7 +6,7 @@ import pages.PagePracticeForm;
 import static com.demoqa.TestData.*;
 
 
-public class TestPracticeFormWithPageObjects extends TestBase {
+public class TestPracticeFormWithRandomUtils extends TestBase {
 
     @Test
     void shouldHaveFilledFieldsInModalBody() {
@@ -45,4 +45,5 @@ public class TestPracticeFormWithPageObjects extends TestBase {
                 .checkTable("State and City", STATE + " " + CITY);
 
     }
+
 }
