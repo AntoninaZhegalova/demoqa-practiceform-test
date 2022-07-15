@@ -12,17 +12,18 @@ import static io.qameta.allure.Allure.step;
 public class TestPracticeForm extends TestBase {
 
     @Test
-    @DisplayName("Проверка заполнения регистрационной формы для студентов")
+    @DisplayName("Форма регистрации для студентов: Проверка наличия заголовка в результирующей форме и " +
+            "валидного значания в поле Date Of Birth ")
     void shouldHaveFilledFieldsInModalBody() {
 
-        step("Открываем форму регистрации", () -> {
+        step("Шаг 1: Открываем форму регистрации", () -> {
             open("/automation-practice-form");
             $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
             executeJavaScript("$('#fixedban').remove()");
             executeJavaScript("$('footer').remove()");
         });
 
-        step("Заполняем форму регистрации", () -> {
+        step("Шаг 2: Заполняем форму регистрации", () -> {
             String firstName = "Ivan";
             String lastName = "Petrov";
             String userEmail = "ip@gmail.com";
@@ -54,14 +55,10 @@ public class TestPracticeForm extends TestBase {
             $("#submit").click();
         });
 
-        step("Проверяем форму регистрации", () -> {
+        step("Шаг 3: Проверяем, что есть заголовок Thanks for submitting the form и что поле " +
+                "Date Of Birth заполнено валидными значениями", () -> {
 
             String dateOfBirthInput = "22 June,1990";
-            String subjectsContainer = "Social Studies";
-            String state = "NCR";
-            String city = "Gurgaon";
-            String reading = "Reading";
-            String avatarPicture = "avatar.jpg";
 
             $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
             checkTable("Date of Birth", dateOfBirthInput);
