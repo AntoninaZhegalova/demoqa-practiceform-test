@@ -23,6 +23,7 @@ public class TestBase {
         Configuration.browserCapabilities = capabilities;
         Configuration.baseUrl = System.getProperty("BASE_URL");
         Configuration.browser = System.getProperty("TEST_BROWSER");
+        Configuration.browserVersion = System.getProperty("VERSION");
         Configuration.browserSize = System.getProperty("SIZE_BROWSER");
         Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
     }
