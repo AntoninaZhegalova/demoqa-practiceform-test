@@ -57,3 +57,9 @@ task testPracticeForm(type: Test) {
         includeTags "PracticeForm"
     }
 }
+
+task testOwner(type: Test) {
+    useJUnitPlatform{
+        includeTags "Owner"
+    }
+}
