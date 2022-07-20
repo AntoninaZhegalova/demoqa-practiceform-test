@@ -21,10 +21,12 @@ public class TestBase {
         capabilities.setCapability("enableVideo", true);
 
         Configuration.browserCapabilities = capabilities;
-        Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browserSize = "1920x1080";
+        Configuration.baseUrl = System.getProperty("BASE_URL", "https://demoqa.com");
+        Configuration.browser = System.getProperty("TEST_BROWSER", "chrome");
+        Configuration.browserSize = System.getProperty("SIZE_BROWSER", "1920x1080");
         Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
     }
+
     @AfterEach
     void addAttachments() {
         Attach.screenshotAs("Last screenshot");
