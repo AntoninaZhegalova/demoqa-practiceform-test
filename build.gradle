@@ -53,13 +53,13 @@ tasks.withType(Test) {
 }
 
 task testPracticeForm(type: Test) {
-    useJUnitPlatform{
+    useJUnitPlatform {
         includeTags "PracticeForm"
     }
 }
 
 task testOwner(type: Test) {
-    useJUnitPlatform{
+    useJUnitPlatform {
         includeTags "Owner"
     }
 }

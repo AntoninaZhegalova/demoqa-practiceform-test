@@ -31,7 +31,6 @@ public class TestBase {
         Configuration.browserSize = System.getProperty("SIZE_BROWSER");
         String remoteUrl = System.getProperty("REMOTE_URL");
         Configuration.remote = String.format("https://%s:%s@%s", config.login(), config.password(), remoteUrl);
-//        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
     }
 
     @AfterEach
