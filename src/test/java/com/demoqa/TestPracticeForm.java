@@ -9,11 +9,11 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
 
-@Tag("PracticeForm")
-@Tag("Owner")
 public class TestPracticeForm extends TestBase {
 
     @Test
+    @Tag("PracticeForm")
+    @Tag("Owner")
     @DisplayName("Форма регистрации для студентов: Проверка наличия заголовка в результирующей форме и " +
             "валидного значания в поле Date Of Birth ")
     void shouldHaveFilledFieldsInModalBody() {
