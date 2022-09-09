@@ -1,6 +1,7 @@
 package com.demoqa;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.PagePracticeForm;
 
@@ -11,6 +12,8 @@ import static io.qameta.allure.Allure.step;
 public class TestPracticeFormWithRandomUtils extends TestBase {
 
     @Test
+    @Tag("PracticeForm")
+    @Tag("Owner")
     @DisplayName("Форма регистрации для студенов: Проверка заполнения рандомными данными")
     void shouldHaveFilledFieldsInModalBody() {
 
